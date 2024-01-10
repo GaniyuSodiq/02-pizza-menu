@@ -71,7 +71,6 @@ function Menu() {
   const pizzas = pizzaData;
   // const pizzas = [];
   const numPizzas = pizzas.length;
-
   return (
     <main className="menu">
       <h2>Our Menu</h2>
@@ -108,7 +107,7 @@ function Pizza(props) {
 
 function Footer() {
   const hours = new Date().getHours();
-  const openHour = 20;
+  const openHour = 12;
   const closeHour = 22;
   const isOpen = hours >= openHour && hours <= closeHour;
   console.log(isOpen);
@@ -116,23 +115,27 @@ function Footer() {
   //   if (hours >= openHour && hours <= closeHour) alert("We're Currently Open!");
   //   else alert("Sorry We're Closed");
 
-  // if (!isOpen) {
-  //   return (
-  //     <p>
-  //       We're happy to welcome you between {openHour}:00 and {closeHour}:00{" "}
-  //     </p>
-  //   );
-  // }
-
   return (
     <footer className="footer">
       {isOpen ? (
-        <div className="order">
-          <p>We're open until {closeHour}:00. Come visit us or order online</p>
-          <button className="btn">Order!</button>
-        </div>
-      ) : null}
+        <Order closeHour={closeHour} />
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00{" "}
+        </p>
+      )}
     </footer>
+  );
+}
+
+function Order(props) {
+  return (
+    <div className="order">
+      <p>
+        We're open until {props.closeHour}:00. Come visit us or order online
+      </p>
+      <button className="btn">Order!</button>
+    </div>
   );
 }
 
